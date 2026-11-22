@@ -4,175 +4,215 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>온담미디어</title>
-<meta name="description" content="따뜻한 하루를 담는 작은 앱을 만드는 온담미디어. 사주 행운번호, 루프, R: 팬노트, 소곤.">
-<meta name="theme-color" content="#1d3b33">
+<meta name="description" content="따뜻한 하루를 담는 앱을 만드는 온담미디어. 사주 행운번호, 루프, R: 팬노트, 소곤.">
+<meta name="theme-color" content="#ffffff">
 <meta property="og:title" content="온담미디어">
-<meta property="og:description" content="따뜻한 하루를 담는 작은 앱을 만듭니다.">
+<meta property="og:description" content="따뜻한 하루를 담는 앱을 만듭니다.">
 <meta property="og:image" content="img/ondam.png">
 <link rel="icon" href="img/ondam.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=Gothic+A1:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
-    --pine:#1d3b33; --pine-2:#2d5248;
-    --stone:#eef1ec; --stone-2:#dfe5de; --stone-3:#c9d3ca;
-    --moss:#56736a; --ember:#f0a23b; --ember-ink:#6b3d06; --white:#fbfcfa;
+    --ink:#10201b; --ink-2:#3d4c46; --mute:#6b7a73;
+    --pine:#1d3b33; --pine-2:#28503f;
+    --paper:#ffffff; --mist:#f4f6f3; --line:#e4e8e3; --line-2:#d3d9d3;
+    --ember:#e8892c;
+    --r-lg:28px; --r-md:18px; --r-sm:12px;
   }
   *{box-sizing:border-box}
-  html{overflow-x:clip;-webkit-text-size-adjust:100%;scroll-padding-top:12px}
+  html{overflow-x:clip;-webkit-text-size-adjust:100%;scroll-padding-top:84px}
   @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-  body{margin:0;background:var(--stone);color:var(--pine);font-family:"Gothic A1",system-ui,"Malgun Gothic",sans-serif;
-    font-size:17px;line-height:1.7;overflow-x:clip}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,system-ui,-apple-system,"Malgun Gothic",sans-serif;
+    font-size:17px;line-height:1.65;letter-spacing:-.011em;word-break:keep-all;overflow-x:clip;
+    -webkit-font-smoothing:antialiased}
   a{color:inherit;text-underline-offset:3px}
-  :focus-visible{outline:3px solid var(--ember);outline-offset:3px;border-radius:4px}
-  .wrap{max-width:1080px;margin:0 auto;padding-left:20px;padding-right:20px}
-  h1,h2,h3{font-family:"Hahmlet",serif;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
-  .skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--white);padding:8px 12px;z-index:9}
+  img{max-width:100%}
+  :focus-visible{outline:3px solid var(--ember);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1160px;margin:0 auto;padding-left:24px;padding-right:24px}
+  h1,h2,h3{margin:0;font-weight:750;letter-spacing:-.035em;text-wrap:balance;line-height:1.18}
+  .skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:#fff;padding:8px 12px;z-index:50}
 
   /* 머리 */
-  .top{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600}
-  .brand img{width:32px;height:32px;border-radius:50%}
-  .top ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
-  .top ul a{display:block;padding:8px 12px;text-decoration:none;color:var(--moss);font-size:15px;border-radius:8px}
-  @media (hover:hover){.top ul a:hover{color:var(--pine);background:var(--stone-2)}}
+  .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);
+    -webkit-backdrop-filter:saturate(1.6) blur(14px);backdrop-filter:saturate(1.6) blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .2s}
+  .top.scrolled{border-bottom-color:var(--line)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:750;font-size:18px;letter-spacing:-.03em}
+  .brand img{width:30px;height:30px;border-radius:9px}
+  .top nav ul{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
+  .top nav a{display:block;padding:8px 14px;text-decoration:none;color:var(--ink-2);font-size:15px;font-weight:550;border-radius:10px}
+  .top nav a.cta{background:var(--ink);color:#fff;margin-left:8px}
+  @media (hover:hover){.top nav a:hover{background:var(--mist);color:var(--ink)}.top nav a.cta:hover{background:var(--pine)}}
 
   /* 첫 화면 */
-  .hero{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center;padding-top:36px;padding-bottom:72px}
-  .hero h1{margin:0;font-size:clamp(52px,8.6vw,100px);line-height:1}
-  .hero .lead{margin:22px 0 0;font-size:21px;max-width:20em}
-  .hero .name{margin:18px 0 0;color:var(--moss);font-size:16px;max-width:27em}
-  .hero .name b{font-family:"Hahmlet",serif;color:var(--pine)}
-  .hero .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
-  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;padding:11px 18px;border-radius:10px;
-    background:var(--pine);color:var(--white);border:1.5px solid var(--pine);touch-action:manipulation}
-  .btn.ghost{background:transparent;color:var(--pine)}
-  @media (hover:hover){.btn:hover{background:var(--pine-2)}.btn.ghost:hover{background:var(--stone-2)}}
+  .hero{position:relative;overflow:hidden;background:
+      radial-gradient(60% 70% at 85% 30%,rgba(29,59,51,.10),transparent 70%),
+      linear-gradient(180deg,#fff 0%,var(--mist) 100%)}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;min-height:640px;padding-top:56px;padding-bottom:72px}
+  .hero h1{font-size:clamp(42px,6.2vw,76px);line-height:1.08;letter-spacing:-.05em}
+  .hero .lead{margin:24px 0 0;font-size:clamp(17px,1.6vw,20px);color:var(--ink-2);max-width:27em;line-height:1.7}
+  .hero .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:14px;
+    text-decoration:none;font-weight:650;font-size:16px;background:var(--ink);color:#fff;touch-action:manipulation;transition:background .15s,transform .15s}
+  .btn.light{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
+  @media (hover:hover){.btn:hover{background:var(--pine)}.btn.light:hover{background:var(--mist)}}
+  .btn:active{transform:scale(.98)}
+  .hero .apps{display:flex;align-items:center;gap:12px;margin-top:44px;color:var(--mute);font-size:14px}
+  .hero .apps span{display:flex}
+  .hero .apps img{width:34px;height:34px;border-radius:10px;box-shadow:0 0 0 2px #fff;margin-left:-8px;background:#fff}
+  .hero .apps img:first-child{margin-left:0}
 
-  .wall{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:8px;background:var(--stone-3);border-radius:14px}
-  .wall > *{aspect-ratio:1;border-radius:9px;background:var(--stone-2);display:block}
-  .wall .w2{grid-column:span 2;aspect-ratio:auto}
-  .wall .d{background:var(--pine-2)} .wall .d2{background:var(--pine)} .wall .l{background:#e8ece6}
-  .wall a,.wall .seal{position:relative;overflow:hidden;background:var(--white)}
-  .wall img{width:100%;height:100%;object-fit:cover;display:block}
-  .wall .seal{box-shadow:0 0 0 3px var(--ember),0 0 34px 6px rgba(240,162,59,.55)}
-  .wall a{transition:transform .2s ease}
-  @media (hover:hover){.wall a:hover{transform:translateY(-3px)}}
+  .stage{position:relative;height:540px}
+  .device{position:absolute;width:248px;padding:9px;border-radius:42px;background:#0f1412;
+    box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 50px 80px -30px rgba(16,32,27,.45),0 18px 30px -18px rgba(16,32,27,.35)}
+  .device img{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:33px}
+  .stage .d1{left:50%;top:22px;margin-left:-124px;z-index:3}
+  .stage .d2{left:50%;top:70px;margin-left:-300px;transform:rotate(-7deg) scale(.88);z-index:2;filter:saturate(.95)}
+  .stage .d3{left:50%;top:70px;margin-left:52px;transform:rotate(7deg) scale(.88);z-index:1;filter:saturate(.95)}
   @media (prefers-reduced-motion:no-preference){
-    .wall .seal{animation:glow 1.6s ease-out .3s both}
-    @keyframes glow{from{box-shadow:0 0 0 3px transparent,0 0 0 0 transparent}}
+    .stage .device{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+    .stage .d2{animation-delay:.12s}.stage .d3{animation-delay:.22s}
+    @keyframes rise{from{opacity:0;translate:0 40px}}
   }
 
-  /* 한눈에 */
-  .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--stone-3);border-bottom:1px solid var(--stone-3)}
-  .facts div{padding:22px 20px;border-left:1px solid var(--stone-3)}
+  /* 숫자 */
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:40px 0;border-bottom:1px solid var(--line)}
+  .facts div{padding:0 24px;border-left:1px solid var(--line)}
   .facts div:first-child{border-left:0;padding-left:0}
-  .facts b{display:block;font-family:"Hahmlet",serif;font-size:22px}
-  .facts span{color:var(--moss);font-size:15px}
+  .facts b{display:block;font-size:30px;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+  .facts span{color:var(--mute);font-size:15px}
 
-  section{padding-top:80px;padding-bottom:80px}
-  .kicker{margin:0 0 6px;color:var(--moss);font-size:15px}
-  h2{margin:0 0 10px;font-size:clamp(30px,4.4vw,44px);line-height:1.2}
-  .sub{margin:0 0 36px;color:var(--moss);max-width:36em}
+  section{padding-top:120px;padding-bottom:120px}
+  .sec-head{max-width:640px;margin-bottom:48px}
+  .sec-head .tag{display:inline-block;margin-bottom:14px;color:var(--pine-2);font-size:15px;font-weight:650}
+  h2{font-size:clamp(32px,4.2vw,50px);line-height:1.18}
+  .sec-head p{margin:16px 0 0;color:var(--ink-2);font-size:18px}
 
-  /* 앱 소개 띠 */
-  .band{--bg:#123b30;--fg:#f3ead2;--mute:#b9c7b4;--acc:#e0b85a;--acc-ink:#3b2a05;--line:rgba(243,234,210,.18);
-    background:var(--bg);color:var(--fg);border-radius:22px;padding:48px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center;
-    margin-bottom:24px;overflow:hidden}
-  .band.loop{--bg:#1c1311;--fg:#fff3ea;--mute:#d6b9a8;--acc:#ff8a3d;--acc-ink:#3a1600;--line:rgba(255,243,234,.16)}
-  .band.fan{--bg:#e6ebf5;--fg:#18203a;--mute:#4b5573;--acc:#2b46c9;--acc-ink:#fff;--line:rgba(24,32,58,.14)}
-  .band.sogon{--bg:#ffe3d8;--fg:#4d2219;--mute:#8a5548;--acc:#ff6b4a;--acc-ink:#fff;--line:rgba(77,34,25,.14);grid-template-columns:1fr}
-  .band .head{display:flex;align-items:center;gap:16px}
-  .band .head img{width:64px;height:64px;border-radius:16px;background:#fff}
-  .band h3{margin:0;font-size:clamp(26px,3.4vw,34px);line-height:1.2}
-  .state{display:inline-block;margin-top:4px;font-size:13px;font-weight:600;padding:2px 10px;border-radius:6px;background:var(--acc);color:var(--acc-ink)}
-  .band .desc{margin:20px 0 0;font-size:18px}
-  .band ul.feat{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
-  .band ul.feat li{padding:11px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:7.5em 1fr;gap:12px;font-size:15.5px}
-  .band ul.feat b{font-weight:600}
-  .band ul.feat span{color:var(--mute)}
-  .band .links{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:24px;font-size:15px}
-  .band .links a{color:var(--mute)}
-  .band .links a.go{color:var(--acc-ink);background:var(--acc);text-decoration:none;font-weight:600;padding:10px 16px;border-radius:10px}
-  @media (hover:hover){.band .links a:hover{color:var(--fg)}.band .links a.go:hover{filter:brightness(1.08);color:var(--acc-ink)}}
-  .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:center}
-  .phones img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:18px;display:block;
-    box-shadow:0 0 0 1px var(--line),0 24px 40px -24px rgba(0,0,0,.55)}
-  .phones img:nth-child(2){transform:translateY(-18px)}
-  .band.fan .phones img,.band.fan .phones img{box-shadow:0 0 0 1px var(--line),0 24px 40px -26px rgba(24,32,58,.45)}
+  /* 앱 쇼케이스 */
+  .tabs{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;padding:2px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 18px 8px 8px;border:0;border-radius:16px;
+    background:var(--mist);color:var(--ink-2);font:inherit;font-size:16px;font-weight:650;cursor:pointer;touch-action:manipulation;transition:background .15s,color .15s}
+  .tabs button img{width:36px;height:36px;border-radius:11px;background:#fff}
+  .tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+  @media (hover:hover){.tabs button:not([aria-selected="true"]):hover{background:var(--line)}}
 
-  /* 만드는 방식 */
-  .ways{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--stone-3)}
-  .ways div{padding:26px 28px 26px 0;border-bottom:1px solid var(--stone-3)}
-  .ways div:nth-child(even){padding-left:28px;border-left:1px solid var(--stone-3)}
-  .ways h3{margin:0 0 6px;font-size:22px}
-  .ways p{margin:0;color:var(--moss)}
+  .app{--bg:#eef3f9;--fg:#12234a;--sub:#4a5878;--acc:#2348a6;--acc-fg:#fff;--line:rgba(18,35,74,.12);
+    display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center;background:var(--bg);color:var(--fg);
+    border-radius:var(--r-lg);padding:64px;overflow:hidden;margin-bottom:20px}
+  .js .app[hidden]{display:none}
+  .app.loop{--bg:#17110f;--fg:#fff4ec;--sub:#cdb3a4;--acc:#ff8a3d;--acc-fg:#2a1000;--line:rgba(255,244,236,.14)}
+  .app.fan{--bg:#eceff6;--fg:#18203a;--sub:#525c79;--acc:#2b46c9;--acc-fg:#fff;--line:rgba(24,32,58,.12)}
+  .app.sogon{--bg:#fff0ea;--fg:#4a2118;--sub:#8a5649;--acc:#ff6b4a;--acc-fg:#fff;--line:rgba(74,33,24,.12)}
+  .app .state{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:650;color:var(--sub)}
+  .app .state::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--acc)}
+  .app h3{margin-top:14px;font-size:clamp(30px,3.4vw,42px)}
+  .app .desc{margin:16px 0 0;font-size:18px;color:var(--sub);max-width:28em}
+  .app ul{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:20px 28px}
+  .app li b{display:block;font-weight:700;font-size:16px}
+  .app li span{display:block;margin-top:2px;color:var(--sub);font-size:15px;line-height:1.55}
+  .app .links{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;margin-top:36px;font-size:15px}
+  .app .links a{color:var(--sub)}
+  .app .links a.go{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:13px;background:var(--acc);color:var(--acc-fg);text-decoration:none;font-weight:700}
+  @media (hover:hover){.app .links a:hover{color:var(--fg)}.app .links a.go:hover{filter:brightness(1.07);color:var(--acc-fg)}}
+  .app .shots{display:flex;justify-content:center;gap:18px;align-items:flex-end}
+  .app .shots .device{position:relative;width:31%;max-width:200px;padding:6px;border-radius:30px;box-shadow:0 30px 50px -28px rgba(0,0,0,.5)}
+  .app .shots .device img{border-radius:24px}
+  .app .shots .device:nth-child(2){margin-bottom:36px}
+  .app.sogon .shots{flex-direction:column;align-items:center;gap:14px;text-align:center;color:var(--sub);font-size:15px}
+  .app.sogon .shots img{width:128px;height:128px;border-radius:32px;box-shadow:0 24px 40px -22px rgba(74,33,24,.45)}
 
-  /* 소식 */
-  .news{list-style:none;margin:0;padding:0;border-left:2px solid var(--stone-3)}
-  .news li{position:relative;padding:0 0 26px 26px}
-  .news li::before{content:"";position:absolute;left:-7px;top:8px;width:12px;height:12px;border-radius:3px;background:var(--stone-3)}
-  .news li:first-child::before{background:var(--ember)}
-  .news time{display:block;color:var(--moss);font-size:14px;font-variant-numeric:tabular-nums}
-  .news b{font-weight:600}
+  /* 약속 */
+  .ways{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .ways div{background:var(--mist);border-radius:var(--r-md);padding:28px 24px 30px}
+  .ways svg{width:28px;height:28px;color:var(--pine)}
+  .ways h3{margin-top:22px;font-size:19px;letter-spacing:-.03em}
+  .ways p{margin:8px 0 0;color:var(--ink-2);font-size:15.5px}
 
-  /* 묻고 답하기 */
-  .faq{border-top:1px solid var(--stone-3)}
-  .faq details{border-bottom:1px solid var(--stone-3)}
-  .faq summary{cursor:pointer;list-style:none;padding:18px 36px 18px 0;font-weight:600;position:relative}
+  /* 소식 · 질문 */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+  .split h2{font-size:clamp(28px,3vw,36px);margin-bottom:28px}
+  .news{list-style:none;margin:0;padding:0}
+  .news li{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+  .news li:last-child{border-bottom:1px solid var(--line)}
+  .news time{color:var(--mute);font-size:14px;font-variant-numeric:tabular-nums;padding-top:2px}
+  .news b{display:block;font-weight:700}
+  .news span{color:var(--ink-2);font-size:15.5px}
+  .faq details{border-top:1px solid var(--line)}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{cursor:pointer;list-style:none;padding:20px 44px 20px 0;font-weight:650;position:relative}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";position:absolute;right:6px;top:14px;font-size:24px;font-weight:400;color:var(--moss)}
-  .faq details[open] summary::after{content:"−"}
-  .faq details p{margin:0 0 20px;color:var(--moss);max-width:44em}
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .faq summary::after{content:"";position:absolute;right:8px;top:50%;width:10px;height:10px;margin-top:-7px;
+    border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
+  .faq details p{margin:0 0 22px;color:var(--ink-2);font-size:15.5px}
 
-  /* 사업자 정보 */
-  .biz{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:start}
-  .ask{background:var(--pine);color:var(--white);border-radius:14px;padding:24px 26px;margin-top:22px}
-  .ask strong{display:block;font-family:"Hahmlet",serif;font-size:20px;margin-bottom:6px}
-  .ask a{color:var(--white);font-size:17px;word-break:break-all}
-  .ask small{display:block;margin-top:8px;color:#c4d4cc;font-size:14px}
-  dl{margin:0;background:var(--white);border-radius:14px;padding:6px 24px;border:1px solid var(--stone-3)}
-  dl .row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--stone-2)}
-  dl .row:last-child{border-bottom:0}
-  dt{color:var(--moss);font-size:15px}
+  /* 문의 */
+  .contact{background:var(--pine);color:#fff;border-radius:var(--r-lg);padding:64px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+    background-image:radial-gradient(50% 120% at 100% 0%,rgba(232,137,44,.22),transparent 60%)}
+  .contact h2{font-size:clamp(28px,3.4vw,40px)}
+  .contact p{margin:12px 0 0;color:#c9d8d0}
+  .contact .btn{background:#fff;color:var(--ink);font-size:17px}
+  @media (hover:hover){.contact .btn:hover{background:var(--mist)}}
+
+  /* 회사 */
+  .biz{display:grid;grid-template-columns:1fr 1.6fr;gap:56px;align-items:start}
+  .biz .sec-head{margin-bottom:0}
+  dl{margin:0;border-top:2px solid var(--ink)}
+  dl .row{display:grid;grid-template-columns:170px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
+  dt{color:var(--mute);font-size:15px}
   dd{margin:0;font-variant-numeric:tabular-nums}
 
-  footer{background:var(--pine);color:#c4d4cc;padding-top:40px;padding-bottom:48px;font-size:14px}
-  footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
-  footer b{display:block;color:var(--white);font-family:"Hahmlet",serif;font-size:16px;margin-bottom:8px}
+  footer{background:#0d1714;color:#9fb0a8;padding-top:64px;padding-bottom:56px;font-size:14px}
+  footer .cols{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:32px}
+  footer .brand{color:#fff;margin-bottom:12px}
+  footer b{display:block;color:#fff;font-size:15px;margin-bottom:12px;font-weight:650}
   footer ul{list-style:none;margin:0;padding:0}
-  footer li{padding:3px 0}
-  footer a{color:#c4d4cc}
-  @media (hover:hover){footer a:hover{color:var(--white)}}
-  footer .copy{margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}
+  footer li{padding:4px 0}
+  footer a{color:#9fb0a8;text-decoration:none}
+  @media (hover:hover){footer a:hover{color:#fff}}
+  footer .copy{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);line-height:1.8}
 
-  @media (max-width:900px){
-    .hero{grid-template-columns:1fr;padding-top:20px;padding-bottom:56px;gap:36px}
-    .band{grid-template-columns:1fr;padding:32px 24px}
-    .facts{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:960px){
+    .hero .wrap{grid-template-columns:1fr;min-height:0;padding-top:40px;gap:24px}
+    .stage{height:470px}
+    .app{grid-template-columns:1fr;padding:44px 32px;gap:40px}
+    .ways{grid-template-columns:1fr 1fr}
+    .split,.biz{grid-template-columns:1fr;gap:64px}
+    .facts{grid-template-columns:1fr 1fr;row-gap:28px}
     .facts div:nth-child(3){border-left:0;padding-left:0}
-    .facts div:nth-child(-n+2){border-bottom:1px solid var(--stone-3)}
-    .split,.biz{grid-template-columns:1fr;gap:40px}
   }
-  @media (max-width:600px){
+  @media (max-width:640px){
     body{font-size:16px}
-    .top ul a{padding:8px 7px;font-size:14px}
-    .hero .lead{font-size:18px}
-    .wall{gap:6px;padding:6px}
-    section{padding-top:56px;padding-bottom:56px}
-    .band{border-radius:18px;padding:28px 20px}
-    .band ul.feat li{grid-template-columns:1fr;gap:0}
-    .facts div{padding:18px 14px}
-    .facts b{font-size:18px}
-    .phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -20px;padding:4px 20px 18px;scrollbar-width:none}
-    .phones img{flex:0 0 62%;scroll-snap-align:center}
-    .phones img:nth-child(2){transform:none}
+    .wrap{padding-left:16px;padding-right:16px}
+    .top .wrap{height:60px}
+    .top nav li:not(:last-child){display:none}
+    .hero .wrap{padding-top:32px;padding-bottom:48px}
+    .hero .actions .btn{flex:1 1 auto}
+    .stage{height:400px;margin:0 -16px}
+    .device{width:190px;border-radius:34px;padding:7px}
+    .device img{border-radius:27px}
+    .stage .d1{margin-left:-95px;top:10px}
+    .stage .d2{margin-left:-205px;top:50px}
+    .stage .d3{margin-left:15px;top:50px}
+    section{padding-top:80px;padding-bottom:80px}
+    .sec-head{margin-bottom:32px}
+    .app{padding:32px 20px;border-radius:22px}
+    .app ul{grid-template-columns:1fr;gap:14px}
+    .app .shots{gap:10px}
+    .app .shots .device{padding:4px;border-radius:20px}
+    .app .shots .device img{border-radius:16px}
+    .app .shots .device:nth-child(2){margin-bottom:20px}
     .ways{grid-template-columns:1fr}
-    .ways div,.ways div:nth-child(even){padding:22px 0;border-left:0}
-    dl{padding:4px 18px}
-    dl .row{grid-template-columns:1fr;gap:0}
+    .facts div{padding:0 14px}
+    .facts b{font-size:24px}
+    .news li{grid-template-columns:1fr;gap:2px}
+    .contact{padding:40px 24px;border-radius:22px}
+    .contact .btn{width:100%}
+    dl .row{grid-template-columns:1fr;gap:2px}
     footer .cols{grid-template-columns:1fr 1fr}
     footer .cols > div:first-child{grid-column:1 / -1}
   }
@@ -180,57 +220,75 @@
 </head>
 <body>
 <a class="skip" href="#apps">본문으로 건너뛰기</a>
-<header class="wrap">
-  <nav class="top" aria-label="주요 메뉴">
-    <a class="brand" href="#" translate="no"><img src="img/ondam.png" alt="" width="32" height="32">온담미디어</a>
-    <ul>
-      <li><a href="#apps">앱</a></li>
-      <li><a href="#news">소식</a></li>
-      <li><a href="#help">도움말</a></li>
-      <li><a href="#business">회사</a></li>
-    </ul>
-  </nav>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#" translate="no"><img src="img/ondam.png" alt="" width="30" height="30">온담미디어</a>
+    <nav aria-label="주요 메뉴">
+      <ul>
+        <li><a href="#apps">앱</a></li>
+        <li><a href="#news">소식</a></li>
+        <li><a href="#help">도움말</a></li>
+        <li><a href="#business">회사 정보</a></li>
+        <li><a class="cta" href="#contact">문의하기</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <main>
-  <div class="wrap hero">
-    <div>
-      <h1 translate="no">온담미디어</h1>
-      <p class="lead">따뜻한 하루를 담는 작은 앱을 만듭니다.</p>
-      <p class="name"><b>온</b>은 따뜻함, <b>담</b>은 담는다는 뜻이에요. 돌을 하나씩 쌓아 담장을 올리듯, 앱을 하나씩 만들어 가고 있어요.</p>
-      <div class="cta">
-        <a class="btn" href="#apps">앱 둘러보기</a>
-        <a class="btn ghost" href="#contact">문의하기</a>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>따뜻한 하루를<br>담는 앱을 만듭니다</h1>
+        <p class="lead">온담미디어는 운세, 짧은 영상, 팬 기록, 메신저처럼 매일 손이 가는 앱을 만들어요. 온은 따뜻함, 담은 담는다는 뜻이에요.</p>
+        <div class="actions">
+          <a class="btn" href="#apps">앱 둘러보기</a>
+          <a class="btn light" href="#contact">문의하기</a>
+        </div>
+        <div class="apps">
+          <span><img src="img/saju.png" alt="" width="34" height="34"><img src="img/loop.png" alt="" width="34" height="34"><img src="img/fannote.png" alt="" width="34" height="34"><img src="img/sogon.png" alt="" width="34" height="34"></span>
+          앱 4개를 만들고 있어요
+        </div>
       </div>
-    </div>
-    <div class="wall" aria-label="온담미디어 앱 담장">
-      <i class="l"></i><i></i><i class="d"></i><i></i><i class="w2 l"></i>
-      <i class="w2"></i><a href="#app-saju" aria-label="사주 행운번호"><img src="img/saju.png" alt="" width="256" height="256"></a><i class="d2"></i><i></i><i class="l"></i>
-      <i class="d"></i><i></i><i class="l"></i><span class="seal"><img src="img/ondam.png" alt="" width="256" height="256"></span><i></i><a href="#app-loop" aria-label="루프"><img src="img/loop.png" alt="" width="256" height="256"></a>
-      <i></i><a href="#app-fan" aria-label="R: 팬노트"><img src="img/fannote.png" alt="" width="256" height="256"></a><i class="w2 d"></i><a href="#app-sogon" aria-label="소곤"><img src="img/sogon.png" alt="" width="256" height="256"></a><i class="l"></i>
+      <div class="stage" aria-hidden="true">
+        <div class="device d2"><img src="img/shots/loop-1.jpg" alt="" width="540" height="960"></div>
+        <div class="device d1"><img src="img/shots/saju-3.jpg" alt="" width="540" height="960"></div>
+        <div class="device d3"><img src="img/shots/fan-1.jpg" alt="" width="540" height="960"></div>
+      </div>
     </div>
   </div>
 
   <div class="wrap">
     <div class="facts">
-      <div><b>앱 4개</b><span>운세, 영상, 팬 기록, 메신저</span></div>
+      <div><b>4개</b><span>운세 · 영상 · 팬 기록 · 메신저</span></div>
       <div><b>구글 플레이</b><span>안드로이드에서 먼저 만나요</span></div>
       <div><b>59개 언어</b><span>루프 라이브 자막</span></div>
-      <div><b>2일 안에 답장</b><span>평일 기준 문의 응답</span></div>
+      <div><b>2일 안에</b><span>평일 기준 문의 답장</span></div>
     </div>
   </div>
 
   <section id="apps" aria-labelledby="apps-h">
     <div class="wrap">
-      <p class="kicker">만든 앱</p>
-      <h2 id="apps-h">하루에 하나씩, 손에 잡히는 앱</h2>
-      <p class="sub">운세를 보고, 짧은 영상을 즐기고, 좋아하는 가수를 기록하고, 가족과 이야기하는 순간을 위해 만들었어요.</p>
+      <div class="sec-head">
+        <span class="tag">만든 앱</span>
+        <h2 id="apps-h">하루의 작은 순간마다<br>쓰는 앱</h2>
+        <p>운세를 보고, 짧은 영상을 즐기고, 좋아하는 가수를 기록하고, 가족과 이야기하는 순간을 위해 만들었어요.</p>
+      </div>
 
-      <article class="band" id="app-saju" aria-labelledby="saju-h">
+      <div class="tabs" role="tablist" aria-label="앱 고르기" hidden>
+        <button role="tab" id="t-saju" aria-controls="app-saju" aria-selected="true"><img src="img/saju.png" alt="" width="36" height="36">사주 행운번호</button>
+        <button role="tab" id="t-loop" aria-controls="app-loop" aria-selected="false" tabindex="-1"><img src="img/loop.png" alt="" width="36" height="36">루프</button>
+        <button role="tab" id="t-fan" aria-controls="app-fan" aria-selected="false" tabindex="-1"><img src="img/fannote.png" alt="" width="36" height="36">R: 팬노트</button>
+        <button role="tab" id="t-sogon" aria-controls="app-sogon" aria-selected="false" tabindex="-1"><img src="img/sogon.png" alt="" width="36" height="36">소곤</button>
+      </div>
+
+      <article class="app" id="app-saju" role="tabpanel" aria-labelledby="saju-h">
         <div>
-          <div class="head"><img src="img/saju.png" alt="" width="64" height="64"><div><h3 id="saju-h">사주 행운번호</h3><span class="state">구글 플레이 출시</span></div></div>
+          <span class="state">구글 플레이 출시</span>
+          <h3 id="saju-h">사주 행운번호</h3>
           <p class="desc">태어난 날과 시간으로 사주를 풀어, 오늘의 운세와 나만의 행운 번호를 알려 드려요.</p>
-          <ul class="feat">
+          <ul>
             <li><b>행운번호 증서</b><span>사주 기운으로 고른 번호 여섯 개를 증서로 받아요</span></li>
             <li><b>오늘의 운세</b><span>매일 바뀌는 총운과 분야별 운</span></li>
             <li><b>깊은 풀이</b><span>조후용신, 신살, 토정비결, 연도별 운세</span></li>
@@ -241,22 +299,23 @@
             <a href="saju/delete-account.html">계정 삭제 안내</a>
           </div>
         </div>
-        <div class="phones">
-          <img src="img/shots/saju-1.jpg" alt="사주 행운번호 첫 화면" width="540" height="960" loading="lazy">
-          <img src="img/shots/saju-2.jpg" alt="행운번호 증서 화면" width="540" height="960" loading="lazy">
-          <img src="img/shots/saju-3.jpg" alt="오늘의 운세 화면" width="540" height="960" loading="lazy">
+        <div class="shots">
+          <div class="device"><img src="img/shots/saju-1.jpg" alt="사주 행운번호 첫 화면" width="540" height="960" loading="lazy"></div>
+          <div class="device"><img src="img/shots/saju-2.jpg" alt="행운번호 증서 화면" width="540" height="960" loading="lazy"></div>
+          <div class="device"><img src="img/shots/saju-3.jpg" alt="오늘의 운세 화면" width="540" height="960" loading="lazy"></div>
         </div>
       </article>
 
-      <article class="band loop" id="app-loop" aria-labelledby="loop-h">
+      <article class="app loop" id="app-loop" role="tabpanel" aria-labelledby="loop-h">
         <div>
-          <div class="head"><img src="img/loop.png" alt="" width="64" height="64"><div><h3 id="loop-h">루프 Loop</h3><span class="state">비공개 테스트 중</span></div></div>
+          <span class="state">비공개 테스트 중</span>
+          <h3 id="loop-h">루프 Loop</h3>
           <p class="desc">짧은 영상과 라이브 방송으로 크리에이터와 만나는 앱이에요. 보고, 응원하고, 선물을 보내요.</p>
-          <ul class="feat">
-            <li><b>내 마음대로 홈</b><span>낚시, 캠핑, 음식… 보고 싶은 메뉴만 골라 순서까지 정해요</span></li>
+          <ul>
+            <li><b>내 마음대로 홈</b><span>보고 싶은 메뉴만 골라 순서까지 정해요</span></li>
             <li><b>표정 효과</b><span>메롱 하면 혀가 쭉, 손하트 하면 하트가 와르르</span></li>
             <li><b>3D 동물 친구</b><span>곰, 판다, 고양이가 나 대신 춤춰요</span></li>
-            <li><b>라이브</b><span>선물, 팬클럽, 호스트 매칭, 59개 언어 자막</span></li>
+            <li><b>라이브</b><span>게스트 8명, 호스트 매칭, 59개 언어 자막</span></li>
           </ul>
           <div class="links">
             <a href="loop/privacy.html">개인정보처리방침</a>
@@ -264,78 +323,92 @@
             <a href="loop/delete-account.html">계정 삭제 안내</a>
           </div>
         </div>
-        <div class="phones">
-          <img src="img/shots/loop-1.jpg" alt="루프 홈 화면" width="540" height="960" loading="lazy">
-          <img src="img/shots/loop-2.jpg" alt="3D 동물 친구 효과" width="540" height="960" loading="lazy">
-          <img src="img/shots/loop-3.jpg" alt="라이브 선물 화면" width="540" height="960" loading="lazy">
+        <div class="shots">
+          <div class="device"><img src="img/shots/loop-1.jpg" alt="루프 홈 화면" width="540" height="960" loading="lazy"></div>
+          <div class="device"><img src="img/shots/loop-2.jpg" alt="3D 동물 친구 효과" width="540" height="960" loading="lazy"></div>
+          <div class="device"><img src="img/shots/loop-3.jpg" alt="라이브 선물 화면" width="540" height="960" loading="lazy"></div>
         </div>
       </article>
 
-      <article class="band fan" id="app-fan" aria-labelledby="fan-h">
+      <article class="app fan" id="app-fan" role="tabpanel" aria-labelledby="fan-h">
         <div>
-          <div class="head"><img src="img/fannote.png" alt="" width="64" height="64"><div><h3 id="fan-h">R: 팬노트</h3><span class="state">비공개 테스트 중</span></div></div>
+          <span class="state">비공개 테스트 중</span>
+          <h3 id="fan-h">R: 팬노트</h3>
           <p class="desc">팬이 만든 비공식 기록 노트예요. 좋아하는 그룹의 모든 순간을 한 권에 모았어요.</p>
-          <ul class="feat">
-            <li><b>멤버 색인</b><span>첫 화면 색인 탭을 누르면 그 멤버로 바로 가요</span></li>
+          <ul>
+            <li><b>멤버 색인</b><span>색인 탭을 누르면 그 멤버로 바로 가요</span></li>
             <li><b>기록</b><span>앨범, 1위 기록, 수상, 홍보대사 목록</span></li>
             <li><b>콜라보 체크</b><span>모은 포토카드와 상품을 체크해요</span></li>
-            <li><b>매일 새 소식</b><span>새 영상과 기록이 하루 두 번 자동으로 채워져요</span></li>
+            <li><b>매일 새 소식</b><span>새 영상과 기록이 하루 두 번 채워져요</span></li>
           </ul>
           <div class="links">
             <a class="go" href="https://play.google.com/store/apps/details?id=com.psm.rescenefanbook" target="_blank" rel="noopener">구글 플레이에서 보기</a>
           </div>
         </div>
-        <div class="phones">
-          <img src="img/shots/fan-1.jpg" alt="R: 팬노트 표지 화면" width="540" height="960" loading="lazy">
-          <img src="img/shots/fan-2.jpg" alt="멤버 화면" width="540" height="960" loading="lazy">
-          <img src="img/shots/fan-3.jpg" alt="콜라보 체크 화면" width="540" height="960" loading="lazy">
+        <div class="shots">
+          <div class="device"><img src="img/shots/fan-1.jpg" alt="R: 팬노트 표지 화면" width="540" height="960" loading="lazy"></div>
+          <div class="device"><img src="img/shots/fan-2.jpg" alt="멤버 화면" width="540" height="960" loading="lazy"></div>
+          <div class="device"><img src="img/shots/fan-3.jpg" alt="콜라보 체크 화면" width="540" height="960" loading="lazy"></div>
         </div>
       </article>
 
-      <article class="band sogon" id="app-sogon" aria-labelledby="sogon-h">
+      <article class="app sogon" id="app-sogon" role="tabpanel" aria-labelledby="sogon-h">
         <div>
-          <div class="head"><img src="img/sogon.png" alt="" width="64" height="64"><div><h3 id="sogon-h">소곤</h3><span class="state">준비 중</span></div></div>
+          <span class="state">준비 중</span>
+          <h3 id="sogon-h">소곤</h3>
           <p class="desc">친구, 가족과 편하게 대화하는 메신저예요. 익숙한 배치에 소곤만의 햄찌 친구가 함께해요.</p>
-          <ul class="feat">
+          <ul>
             <li><b>대화</b><span>1:1과 단체 대화, 사진과 최대 1GB 파일</span></li>
             <li><b>가입</b><span>이메일로 가입하고 비밀번호도 쉽게 찾아요</span></li>
             <li><b>영어 화면</b><span>해외 친구와도 같이 쓸 수 있어요</span></li>
           </ul>
         </div>
+        <div class="shots">
+          <img src="img/sogon.png" alt="" width="128" height="128" loading="lazy">
+          출시 준비 중이에요
+        </div>
       </article>
     </div>
   </section>
 
-  <section aria-labelledby="ways-h" style="padding-top:24px">
+  <section aria-labelledby="ways-h" style="padding-top:0">
     <div class="wrap">
-      <p class="kicker">만드는 방식</p>
-      <h2 id="ways-h">작은 회사라서 지키는 것</h2>
-      <p class="sub">크게 약속하기보다, 매번 지킬 수 있는 것만 적었어요.</p>
+      <div class="sec-head">
+        <span class="tag">만드는 방식</span>
+        <h2 id="ways-h">작은 회사라서<br>지키는 것</h2>
+        <p>크게 약속하기보다, 매번 지킬 수 있는 것만 적었어요.</p>
+      </div>
       <div class="ways">
-        <div><h3>꼭 필요한 정보만 받아요</h3><p>앱마다 무엇을 왜 받는지 개인정보처리방침에 적고, 탈퇴하면 지워요.</p></div>
-        <div><h3>소리도 직접 만들어요</h3><p>버튼, 선물, 보상에 나는 효과음을 직접 합성해요. 설정에서 언제든 끌 수 있어요.</p></div>
-        <div><h3>약관과 환불을 먼저 적어요</h3><p>결제가 있는 앱은 출시 전에 약관, 환불 규정, 사업자 정보를 먼저 넣어요.</p></div>
-        <div><h3>만든 사람이 답장해요</h3><p>보내 주신 문의와 의견은 앱을 만든 사람이 직접 읽고 고쳐요.</p></div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3>꼭 필요한 정보만</h3><p>앱마다 무엇을 왜 받는지 개인정보처리방침에 적고, 탈퇴하면 지워요.</p></div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>
+          <h3>소리도 직접</h3><p>버튼, 선물, 보상에 나는 효과음을 직접 만들어요. 설정에서 언제든 꺼요.</p></div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>
+          <h3>약관과 환불을 먼저</h3><p>결제가 있는 앱은 출시 전에 약관, 환불 규정, 사업자 정보를 먼저 넣어요.</p></div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></svg>
+          <h3>만든 사람이 답장</h3><p>보내 주신 문의와 의견은 앱을 만든 사람이 직접 읽고 고쳐요.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="news" aria-labelledby="news-h" style="padding-top:24px">
+  <section id="news" aria-labelledby="news-h" style="padding-top:0">
     <div class="wrap split">
       <div>
-        <p class="kicker">소식</p>
-        <h2 id="news-h">최근에 바뀐 것</h2>
+        <h2 id="news-h">최근 소식</h2>
         <ol class="news" reversed>
-          <li><time datetime="2026-11-22">2026.11.22</time><b>R: 팬노트 1.2</b> 새 디자인 「색인 노트」와 새 아이콘</li>
-          <li><time datetime="2026-11-22">2026.11.22</time><b>루프</b> 라이브 호스트 매칭, 화면을 2~4칸으로 나눠 함께 방송</li>
-          <li><time datetime="2026-11-21">2026.11.21</time><b>사주 행운번호</b> 구글 플레이 정식 출시 신청</li>
-          <li><time datetime="2026-11-20">2026.11.20</time><b>루프</b> 라이브 영상 방송과 선물 서버 연결</li>
-          <li><time datetime="2026-11-17">2026.11.17</time><b>사주 행운번호</b> 단청 디자인, 조후용신·신살·토정비결 추가</li>
-          <li><time datetime="2026-11-05">2026.11.05</time><b>R: 팬노트</b> 첫 테스트 공개</li>
+          <li><time datetime="2026-11-22">2026.11.22</time><div><b>사주 행운번호 1.0.8</b><span>새 디자인 「청화백자」, 밝은 화면으로 글자가 더 잘 보여요</span></div></li>
+          <li><time datetime="2026-11-22">2026.11.22</time><div><b>루프</b><span>라이브 게스트 최대 8명, 방송하는 사람까지 9명이 한 화면에</span></div></li>
+          <li><time datetime="2026-11-22">2026.11.22</time><div><b>R: 팬노트 1.2</b><span>새 디자인 「색인 노트」와 새 아이콘</span></div></li>
+          <li><time datetime="2026-11-22">2026.11.22</time><div><b>루프</b><span>라이브 호스트 매칭, 화면을 2~4칸으로 나눠 함께 방송</span></div></li>
+          <li><time datetime="2026-11-21">2026.11.21</time><div><b>사주 행운번호</b><span>구글 플레이 정식 출시</span></div></li>
+          <li><time datetime="2026-11-20">2026.11.20</time><div><b>루프</b><span>라이브 영상 방송과 선물 서버 연결</span></div></li>
         </ol>
       </div>
       <div id="help">
-        <p class="kicker">도움말</p>
         <h2>자주 묻는 질문</h2>
         <div class="faq">
           <details><summary>결제한 것을 환불하고 싶어요</summary>
@@ -353,17 +426,24 @@
     </div>
   </section>
 
-  <section id="business" aria-labelledby="biz-h" style="padding-top:24px">
-    <div class="wrap biz">
-      <div>
-        <p class="kicker">회사</p>
-        <h2 id="biz-h">사업자 정보</h2>
-        <p class="sub" style="margin-bottom:0">전자상거래법에 따라 사업자 정보를 알려 드려요. <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=1331086097" target="_blank" rel="noopener">공정거래위원회에서 확인하기</a></p>
-        <div class="ask" id="contact">
-          <strong>문의하기</strong>
-          <a href="mailto:doridori5252@gmail.com">doridori5252@gmail.com</a>
-          <small>앱 이용, 결제, 환불 문의는 평일 기준 2일 안에 답장 드려요.</small>
+  <section aria-labelledby="contact-h" style="padding-top:0;padding-bottom:0">
+    <div class="wrap">
+      <div class="contact" id="contact">
+        <div>
+          <h2 id="contact-h">궁금한 점이 있으면<br>편하게 물어보세요</h2>
+          <p>앱 이용, 결제, 환불 문의는 평일 기준 2일 안에 답장 드려요.</p>
         </div>
+        <a class="btn" href="mailto:doridori5252@gmail.com">doridori5252@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="business" aria-labelledby="biz-h">
+    <div class="wrap biz">
+      <div class="sec-head">
+        <span class="tag">회사 정보</span>
+        <h2 id="biz-h">사업자 정보</h2>
+        <p>전자상거래법에 따라 사업자 정보를 알려 드려요. <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=1331086097" target="_blank" rel="noopener">공정거래위원회에서 확인하기</a></p>
       </div>
       <dl>
         <div class="row"><dt>상호</dt><dd>온담미디어</dd></div>
@@ -381,16 +461,52 @@
 <footer>
   <div class="wrap">
     <div class="cols">
-      <div><b translate="no">온담미디어</b>따뜻한 하루를 담는 작은 앱을 만듭니다.</div>
+      <div><a class="brand" href="#" translate="no"><img src="img/ondam.png" alt="" width="30" height="30">온담미디어</a>따뜻한 하루를 담는 앱을 만듭니다.</div>
       <div><b>앱</b><ul>
-        <li><a href="#app-saju">사주 행운번호</a></li><li><a href="#app-loop">루프</a></li>
-        <li><a href="#app-fan">R: 팬노트</a></li><li><a href="#app-sogon">소곤</a></li></ul></div>
+        <li><a href="#app-saju" data-tab="t-saju">사주 행운번호</a></li><li><a href="#app-loop" data-tab="t-loop">루프</a></li>
+        <li><a href="#app-fan" data-tab="t-fan">R: 팬노트</a></li><li><a href="#app-sogon" data-tab="t-sogon">소곤</a></li></ul></div>
       <div><b>안내</b><ul>
         <li><a href="loop/privacy.html">루프 개인정보처리방침</a></li><li><a href="loop/child-safety.html">루프 아동 안전 정책</a></li>
         <li><a href="#help">자주 묻는 질문</a></li><li><a href="mailto:doridori5252@gmail.com">문의 메일</a></li></ul></div>
     </div>
-    <div class="copy">© 2026 온담미디어 · 사업자등록번호 133-10-86097</div>
+    <div class="copy">온담미디어 · 대표 박성민 · 사업자등록번호 133-10-86097 · 통신판매업 제2026-충남천안-2496호<br>© 2026 온담미디어</div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var top = document.getElementById('top');
+  var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // 앱 탭: 스크립트가 없으면 네 앱이 모두 차례로 보인다
+  var list = document.querySelector('.tabs');
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role=tab]'));
+  document.documentElement.classList.add('js');
+  list.hidden = false;
+  function select(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+  // #app-loop 같은 주소나 아래 링크로 오면 그 앱을 연다
+  function fromHash() {
+    var t = tabs.filter(function (x) { return '#' + x.getAttribute('aria-controls') === location.hash; })[0];
+    select(t || tabs[0]);
+  }
+  window.addEventListener('hashchange', fromHash); fromHash();
+})();
+</script>
 </body>
 </html>
